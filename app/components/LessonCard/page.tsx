@@ -9,7 +9,6 @@ export interface Lesson {
   content: string;
 }
 
-
 const Lesson = [
   {
     title: "Day 1 - Your Startup Is Too Product-Centric",
@@ -38,8 +37,6 @@ const Lesson = [
   },
 ];
 
-
-
 const LessonCard = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
@@ -61,9 +58,15 @@ const LessonCard = () => {
             onClick={() => toggleExpand(i)}
             className="px-6 py-4 flex justify-between items-center cursor-pointer"
           >
-            <h3 className="text-lg font-medium text-gray-900">{lesson.title}</h3>
+            <h3 className="text-lg font-medium text-gray-900">
+              {lesson.title}
+            </h3>
             <button className="text-gray-500 hover:text-blue-600 transition-colors">
-              {expandedIndex === i ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              {expandedIndex === i ? (
+                <ChevronUp size={20} />
+              ) : (
+                <ChevronDown size={20} />
+              )}
             </button>
           </div>
 
@@ -88,7 +91,6 @@ const LessonCard = () => {
       ))}
     </div>
   );
+};
 
-}
-
-export default LessonCard
+export default LessonCard;
