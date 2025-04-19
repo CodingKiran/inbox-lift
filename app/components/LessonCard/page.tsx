@@ -4,17 +4,17 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-interface Lesson {
+export interface Lesson {
   title: string;
   content: string;
 }
 
-interface LessonCardProps {
+export interface LessonCardProps {
   lesson: Lesson;
   index: number;
 }
 
-const LessonCard = ({ lesson, index }: LessonCardProps) => {
+const LessonCard: React.FC<LessonCardProps> = ({ lesson, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div className="my-6">
