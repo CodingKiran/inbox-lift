@@ -1,6 +1,4 @@
 import React from "react";
-import lessons from "../../data/lessons";
-import LessonCard from "../LessonCard/page";
 
 const CoursePreview = () => {
   return (
@@ -17,12 +15,6 @@ const CoursePreview = () => {
             In just 5 days, you&apos;ll discover the strategic blind spots
             costing your SaaS business growth and revenue.
           </p>
-
-          <div className="space-y-4">
-            {lessons.map((lesson, index) => (
-              <LessonCard key={index} lesson={lesson} index={index} />
-            ))}
-          </div>
         </div>
       </div>
     </section>
