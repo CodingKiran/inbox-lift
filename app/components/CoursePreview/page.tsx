@@ -1,4 +1,5 @@
 import React from "react";
+import LessonCard from "../LessonCard/page";
 
 const CoursePreview = () => {
   return (
@@ -16,6 +17,7 @@ const CoursePreview = () => {
             costing your SaaS business growth and revenue.
           </p>
         </div>
+        <LessonCard />
       </div>
     </section>
   );
