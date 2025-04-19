@@ -88,6 +88,7 @@ const LessonCard = () => {
       ))}
     </div>
   );
-};
 
-export default LessonCard;
+}
+
+export default LessonCard
