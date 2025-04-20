@@ -22,11 +22,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const sansClass =
+    typeof geistSans.variable === "string" ? geistSans.variable : "";
+  const monoClass =
+    typeof geistMono.variable === "string" ? geistMono.variable : "";
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable ?? ""} ${geistMono.variable ?? ""} antialiased`}
-      >
+      <body className={`${sansClass} ${monoClass} antialiased`}>
         {children}
       </body>
     </html>

@@ -1,7 +1,36 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Mail, ArrowRight } from "lucide-react";
 
 export default function SaaSFounderLanding() {
+  const [email, setEmail] = useState(" ");
+  const handleSubmitForm = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email }),
+      });
+
+      if (response.ok) {
+        alert("Subscription successful!");
+        setEmail(" ");
+      } else {
+        const errorData = await response.json();
+        alert(
+          "Subscription failed: " + (errorData.error || "Please try again.")
+        );
+      }
+    } catch (error) {
+      console.log(` ${error}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4 py-16 font-sans">
       <div className="max-w-2xl w-full text-center">
@@ -22,11 +51,11 @@ export default function SaaSFounderLanding() {
         </h2>
 
         <p className="text-base text-gray-700 mb-6">
-          We’re <strong>Kiran</strong> and <strong>Swetha</strong> —
-          ghostwriters who’ve worked with multiple SaaS companies to craft
-          growth-driving content. After seeing countless founders burn out or
-          stall because of misaligned messaging, we realized: the real
-          bottleneck isn’t marketing. It’s clarity.
+          We’re <strong>Kiran</strong> and <strong>Sweta</strong> — ghostwriters
+          who’ve worked with multiple SaaS companies to craft growth-driving
+          content. After seeing countless founders burn out or stall because of
+          misaligned messaging, we realized: the real bottleneck isn’t
+          marketing. It’s clarity.
         </p>
 
         <p className="text-base text-gray-700 mb-8">
@@ -39,7 +68,7 @@ export default function SaaSFounderLanding() {
           programs I’ve taken.”
         </blockquote>
 
-        <form className="space-y-4">
+        <form onSubmit={handleSubmitForm} className="space-y-4">
           <div className="relative">
             <Mail
               size={18}
@@ -48,6 +77,8 @@ export default function SaaSFounderLanding() {
             <input
               type="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email address"
               className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />

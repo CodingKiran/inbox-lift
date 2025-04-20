@@ -1,13 +1,43 @@
+"use client";
+
 import { ArrowRight, Mail } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 const EmailCaptureForm = () => {
+  const [subscriberEmail, setSubscriberEmail] = useState("");
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: subscriberEmail,  }),
+      });
+
+      if (response.ok) {
+        alert("Subscription successful!");
+        setSubscriberEmail(" ");
+      } else {
+        const errorData = await response.json();
+        alert(
+          "Subscription failed: " + (errorData.error || "Please try again.")
+        );
+      }
+    } catch (error) {
+      alert(`An ${error} occurred. Please try again`);
+    }
+  };
+
   return (
     <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
       <h3 className="text-xl font-semibold mb-4 text-gray-900">
         Start Your Growth Journey
       </h3>
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div className="relative">
           <Mail
             size={18}
@@ -16,6 +46,8 @@ const EmailCaptureForm = () => {
           <input
             type="email"
             required
+            value={subscriberEmail}
+            onChange={(e) => setSubscriberEmail(e.target.value)}
             placeholder="Your email address"
             className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
