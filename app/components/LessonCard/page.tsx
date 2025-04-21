@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import EmailCaptureForm from "../EmailCaptureForm/page";
 
 export interface Lesson {
   title: string;
@@ -89,6 +90,7 @@ const LessonCard = () => {
           </AnimatePresence>
         </motion.div>
       ))}
+      <EmailCaptureForm />
     </div>
   );
 };
